@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import net.iqbalfauzan.foodrecipe.R
 import net.iqbalfauzan.foodrecipe.databinding.ItemCategoryBinding
-import net.iqbalfauzan.foodrecipe.model.Categories
+import net.iqbalfauzan.foodrecipe.model.Category
 
 
 /**
  * Created by Iqbalmf on 2019-08-11
  */
-class CategoryListAdapter(val categories: ArrayList<Categories>) :
+class CategoryListAdapter(val categories: ArrayList<Category>) :
     RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -29,7 +29,7 @@ class CategoryListAdapter(val categories: ArrayList<Categories>) :
         }
     }
 
-    fun updateCategories(foodCategories: List<Categories>) {
+    fun updateCategories(foodCategories: List<Category>) {
         categories.clear()
         categories.addAll(foodCategories)
         notifyDataSetChanged()

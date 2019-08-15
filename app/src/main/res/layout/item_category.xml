@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="category" type="net.iqbalfauzan.foodrecipe.model.Categories"/>
+        <variable name="category" type="net.iqbalfauzan.foodrecipe.model.Category"/>
     </data>
 
     <androidx.cardview.widget.CardView
