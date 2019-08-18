@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        observeViewModel()
     }
 
     private fun init() {
@@ -32,10 +33,9 @@ class HomeActivity : AppCompatActivity() {
             adapter = categoryListAdapter
         }
 
-        observeViewModel()
     }
 
-    fun observeViewModel() {
+    private fun observeViewModel() {
         viewModel.categories.observe(this@HomeActivity, Observer { categories ->
             categories.let {
                 it.categories?.let { it1 -> categoryListAdapter.updateCategories(it1) }
