@@ -1,6 +1,7 @@
-package net.iqbalfauzan.foodrecipe.view
+package net.iqbalfauzan.foodrecipe.view.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import net.iqbalfauzan.foodrecipe.model.Category
 /**
  * Created by Iqbalmf on 2019-08-11
  */
-class CategoryListAdapter(val categories: ArrayList<Category>) :
+class CategoryListAdapter(val categories: ArrayList<Category>, private val listener: EventListener?) :
     RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -26,6 +27,9 @@ class CategoryListAdapter(val categories: ArrayList<Category>) :
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.apply {
             holder.binding.category = categories[position]
+            holder.binding.categoryView.setOnClickListener{
+                listener?.onClickCategory(categories[position])
+            }
         }
     }
 
@@ -37,4 +41,8 @@ class CategoryListAdapter(val categories: ArrayList<Category>) :
 
     inner class CategoryViewHolder(val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.getRoot())
+
+    interface EventListener {
+        fun onClickCategory(categor: Category)
+    }
 }

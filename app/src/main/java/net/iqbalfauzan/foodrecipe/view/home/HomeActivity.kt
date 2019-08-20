@@ -1,22 +1,22 @@
-package net.iqbalfauzan.foodrecipe.view
+package net.iqbalfauzan.foodrecipe.view.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.iqbalfauzan.foodrecipe.R
+import net.iqbalfauzan.foodrecipe.model.Category
 import net.iqbalfauzan.foodrecipe.viewmodel.HomeViewModel
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: HomeViewModel
-    private val categoryListAdapter = CategoryListAdapter(arrayListOf())
+    private var wireframe = HomeWireframe()
+    private lateinit var categoryListAdapter: CategoryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
     private fun init() {
         viewModel = ViewModelProviders.of(this@HomeActivity).get(HomeViewModel::class.java)
         viewModel.refresh()
-
+        populateListItem()
         listCategory.apply {
             layoutManager = GridLayoutManager(this@HomeActivity, 3, RecyclerView.VERTICAL, false)
             adapter = categoryListAdapter
@@ -55,8 +55,16 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.shouldShowToast.observe(this@HomeActivity, Observer {
-            Toast.makeText(this@HomeActivity, it, Toast.LENGTH_SHORT).show()
+        viewModel.shouldOpenCategoryList.observe(this@HomeActivity, Observer {
+            wireframe.openCategoryList(this@HomeActivity, it)
+        })
+    }
+
+    private fun populateListItem() {
+        categoryListAdapter = CategoryListAdapter(arrayListOf(), object : CategoryListAdapter.EventListener {
+            override fun onClickCategory(categor: Category) {
+                viewModel.onClickCategory(categor)
+            }
         })
     }
 }
