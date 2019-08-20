@@ -28,6 +28,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     val categories = MutableLiveData<List<Category>>()
     val shouldShowError = MutableLiveData<Boolean>()
     val shouldShowLoading = MutableLiveData<Boolean>()
+    val shouldShowToast = MutableLiveData<String>()
 
     override fun onCleared() {
         super.onCleared()
@@ -49,6 +50,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             val categories = CategoryDatabase(getApplication()).categoryDao().getAllCategory()
             categoryRetrived(categories)
         }
+        shouldShowToast.value = "Fetch From Database"
     }
 
     private fun fetchFromRemote() {
@@ -69,6 +71,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
                 })
         )
+        shouldShowToast.value = "Fetch From Remote"
     }
 
     private fun categoryRetrived(category: List<Category>) {
@@ -85,6 +88,8 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             result.insertAllCategory(list.categories)
 
             categoryRetrived(list.categories)
+
+            sharedPreferencesHelper.saveUpdateTime(System.nanoTime())
         }
     }
 }
