@@ -9,18 +9,23 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import net.iqbalfauzan.foodrecipe.base.BaseViewModel
 import net.iqbalfauzan.foodrecipe.model.Categories
-import net.iqbalfauzan.foodrecipe.model.CategoriesApiService
-import net.iqbalfauzan.foodrecipe.model.CategoryDatabase
+import net.iqbalfauzan.foodrecipe.rest.CategoriesApiService
+import net.iqbalfauzan.foodrecipe.db.CategoryDatabase
+import net.iqbalfauzan.foodrecipe.model.Category
+import net.iqbalfauzan.foodrecipe.utils.SharedPreferencesHelper
 
 /**
  * Created by Iqbalmf on 2019-08-11
  */
 class HomeViewModel(application: Application) : BaseViewModel(application) {
 
+    private var sharedPreferencesHelper = SharedPreferencesHelper(getApplication())
+    private var refreshedTime = 10 * 1000 * 1000 *1000L
+
     private val categoryService = CategoriesApiService()
     private val disposeable = CompositeDisposable()
 
-    val categories = MutableLiveData<Categories>()
+    val categories = MutableLiveData<List<Category>>()
     val shouldShowError = MutableLiveData<Boolean>()
     val shouldShowLoading = MutableLiveData<Boolean>()
 
@@ -30,7 +35,20 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun refresh() {
-        fetchFromRemote()
+        val updateTime = sharedPreferencesHelper.getUpdateTime()
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshedTime){
+            fetchFromDatabase()
+        }else{
+            fetchFromRemote()
+        }
+    }
+
+    private fun fetchFromDatabase(){
+        shouldShowLoading.value = true
+        launch {
+            val categories = CategoryDatabase(getApplication()).categoryDao().getAllCategory()
+            categoryRetrived(categories)
+        }
     }
 
     private fun fetchFromRemote() {
@@ -53,7 +71,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         )
     }
 
-    private fun categoryRetrived(category: Categories) {
+    private fun categoryRetrived(category: List<Category>) {
         categories.value = category
         shouldShowLoading.value = false
         shouldShowError.value = false
@@ -64,9 +82,9 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             val dao = CategoryDatabase(getApplication()).categoryDao()
             dao.deleteAllCategory()
             val result = CategoryDatabase(getApplication()).categoryDao()
-            result.insertAllCategory(list)
+            result.insertAllCategory(list.categories)
 
-            categoryRetrived(list)
+            categoryRetrived(list.categories)
         }
     }
 }

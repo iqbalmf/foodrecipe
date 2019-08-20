@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Iqbalmf on 2019-08-11
  */
-@Entity
+@Entity(tableName = "categories_db")
 data class Category(
     @ColumnInfo(name = "category_id")
     @SerializedName("idCategory")

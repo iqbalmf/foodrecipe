@@ -1,6 +1,7 @@
-package net.iqbalfauzan.foodrecipe.model
+package net.iqbalfauzan.foodrecipe.rest
 
 import io.reactivex.Single
+import net.iqbalfauzan.foodrecipe.model.Categories
 import retrofit2.http.GET
 
 /**

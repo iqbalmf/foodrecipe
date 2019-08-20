@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.categories.observe(this@HomeActivity, Observer { categories ->
             categories.let {
-                it.categories?.let { it1 -> categoryListAdapter.updateCategories(it1) }
+                categoryListAdapter.updateCategories(it)
             }
         })
 

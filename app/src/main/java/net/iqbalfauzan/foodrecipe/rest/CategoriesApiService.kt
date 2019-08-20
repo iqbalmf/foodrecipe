@@ -1,6 +1,7 @@
-package net.iqbalfauzan.foodrecipe.model
+package net.iqbalfauzan.foodrecipe.rest
 
 import io.reactivex.Single
+import net.iqbalfauzan.foodrecipe.model.Categories
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

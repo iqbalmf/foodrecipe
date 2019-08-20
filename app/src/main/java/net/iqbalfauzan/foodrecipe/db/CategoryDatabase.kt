@@ -1,14 +1,16 @@
-package net.iqbalfauzan.foodrecipe.model
+package net.iqbalfauzan.foodrecipe.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import net.iqbalfauzan.foodrecipe.model.Categories
+import net.iqbalfauzan.foodrecipe.model.Category
 
 /**
  * Created by Iqbalmf on 2019-08-17
  */
-@Database(entities = arrayOf(Category::class), exportSchema = false, version = 1)
+@Database(entities = [Category::class], exportSchema = false, version = 1)
 abstract class CategoryDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoriesDao
@@ -19,8 +21,11 @@ abstract class CategoryDatabase : RoomDatabase() {
         private var LOCK = Any()
         var DB_NAME: String = "DB_CATEGORY"
 
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            instance ?: buildDatabase(context).also {
+        operator fun invoke(context: Context) = instance ?: synchronized(
+            LOCK
+        ) {
+            instance
+                ?: buildDatabase(context).also {
                 instance = it
             }
         }
