@@ -1,7 +1,9 @@
 package net.iqbalfauzan.foodrecipe.view.home
 
+import android.annotation.TargetApi
 import android.app.Activity
-import android.content.Intent
+import android.app.ActivityOptions
+import android.os.Build
 import net.iqbalfauzan.foodrecipe.utils.start
 import net.iqbalfauzan.foodrecipe.view.categorymenu.CategoryMenuWireframe
 
@@ -17,6 +19,7 @@ class HomeWireframe {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     fun openCategoryList(source: Activity, category: String){
         CategoryMenuWireframe.startCategoryMenu(source = source, category = category)
     }

@@ -1,7 +1,6 @@
 package net.iqbalfauzan.foodrecipe.view.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +12,8 @@ import net.iqbalfauzan.foodrecipe.model.Category
 /**
  * Created by Iqbalmf on 2019-08-11
  */
-class CategoryListAdapter(val categories: ArrayList<Category>, private val listener: EventListener?) :
-    RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder>() {
+class HomeCategoryListAdapter(val categories: ArrayList<Category>, private val listener: EventListener?) :
+    RecyclerView.Adapter<HomeCategoryListAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(

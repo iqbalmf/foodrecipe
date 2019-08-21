@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import net.iqbalfauzan.foodrecipe.base.BaseViewModel
 import net.iqbalfauzan.foodrecipe.model.Categories
-import net.iqbalfauzan.foodrecipe.rest.CategoriesApiService
+import net.iqbalfauzan.foodrecipe.rest.FoodRecipeApiService
 import net.iqbalfauzan.foodrecipe.db.CategoryDatabase
 import net.iqbalfauzan.foodrecipe.model.Category
 import net.iqbalfauzan.foodrecipe.utils.SharedPreferencesHelper
@@ -20,9 +20,9 @@ import net.iqbalfauzan.foodrecipe.utils.SharedPreferencesHelper
 class HomeViewModel(application: Application) : BaseViewModel(application) {
 
     private var sharedPreferencesHelper = SharedPreferencesHelper(getApplication())
-    private var refreshedTime = 10 * 1000 * 1000 *1000L
+    private var refreshedTime = 5 * 60 * 1000 * 1000 *1000L
 
-    private val categoryService = CategoriesApiService()
+    private val categoryService = FoodRecipeApiService()
     private val disposeable = CompositeDisposable()
 
     val categories = MutableLiveData<List<Category>>()
