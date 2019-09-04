@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="latestFood"
+            type="net.iqbalfauzan.foodrecipe.model.Meals.Meal" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/latestFoodImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:src="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:imageUrl="@{latestFood.mealImage}"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/latestFoodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:text="@{latestFood.mealName}"
+        app:layout_constraintBottom_toBottomOf="@id/latestFoodImage"
+        app:layout_constraintStart_toStartOf="@id/latestFoodImage"
+        tools:text="Food Name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

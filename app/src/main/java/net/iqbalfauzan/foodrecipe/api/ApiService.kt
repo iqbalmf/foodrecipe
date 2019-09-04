@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit
 class ApiService {
     private val BASE_URL = "https://www.themealdb.com/"
 
-    val interceptor: HttpLoggingInterceptor =
+    private val interceptor: HttpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    var client = OkHttpClient.Builder()
+    private var client = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .readTimeout(10, TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)
