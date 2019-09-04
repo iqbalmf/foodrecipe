@@ -17,6 +17,9 @@ interface FoodRecipeApi {
     fun getMealCategory(@Query("c") category: String): Single<Meals>
 
     @GET("api/json/v1/1/latest.php")
-    fun getLatestMeal() : Single<Meals>
+    fun getLatestMeal(): Single<Meals>
+
+    @GET("api/json/v1/1/search.php")
+    fun getDetailsMeal(@Query("s") nameFood: String): Single<Meals>
 
 }

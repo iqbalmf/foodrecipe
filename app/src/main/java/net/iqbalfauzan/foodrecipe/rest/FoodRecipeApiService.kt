@@ -22,4 +22,8 @@ class FoodRecipeApiService {
     fun getLatestMeal(): Single<Meals> {
         return apiService.api.getLatestMeal()
     }
+
+    fun getDetailsMeal(nameFood: String): Single<Meals>{
+        return apiService.api.getDetailsMeal(nameFood = nameFood)
+    }
 }

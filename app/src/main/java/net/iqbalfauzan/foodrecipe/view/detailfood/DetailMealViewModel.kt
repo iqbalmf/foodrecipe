@@ -1,4 +1,4 @@
-package net.iqbalfauzan.foodrecipe.viewmodel
+package net.iqbalfauzan.foodrecipe.view.detailfood
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -10,48 +10,42 @@ import net.iqbalfauzan.foodrecipe.base.BaseViewModel
 import net.iqbalfauzan.foodrecipe.model.Meals
 import net.iqbalfauzan.foodrecipe.rest.FoodRecipeApiService
 
-/**
- * Project foodrecipe
- *
- * Created by IqbalMF on 8/20/2019
- */
-class CategoryMenuViewModel(application: Application) : BaseViewModel(application = application){
-    private val mealCategoryService = FoodRecipeApiService()
+class DetailMealViewModel(application: Application) : BaseViewModel(application = application) {
+    private val detailMealService = FoodRecipeApiService()
     private val disposable = CompositeDisposable()
 
-    val mealCategory = MutableLiveData<List<Meals.Meal>>()
-    val shouldShowError = MutableLiveData<Boolean>()
+    val mealsDetail = MutableLiveData<List<Meals.Meal>>()
     val shouldShowLoading = MutableLiveData<Boolean>()
-    val categoryName = MutableLiveData<String>()
+    val foodName = MutableLiveData<String>()
 
-    fun fetch(category: String?){
-        categoryName.value = category
-        category?.let { GetCategoryMenu(it) }
+    fun prepareDetailsFood(nameFood: String?){
+        foodName.value = nameFood
+        nameFood?.let {
+
+        }
     }
 
-    private fun GetCategoryMenu(category: String){
+    private fun GetDetailsFood(nameFood: String){
         shouldShowLoading.value = true
         disposable.add(
-            mealCategoryService.getMealCategory(category)
+            detailMealService.getDetailsMeal(nameFood)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Meals>(){
                     override fun onSuccess(t: Meals) {
-                        mealCategoryRetrieved(t.meals)
+
                     }
 
                     override fun onError(e: Throwable) {
-                        shouldShowError.value = true
                         shouldShowLoading.value = false
                     }
                 })
         )
     }
 
-    private fun mealCategoryRetrieved(mealCategory: List<Meals.Meal>){
-        this.mealCategory.value = mealCategory
+    private fun detailsMealRetrieved(foodDetails: List<Meals.Meal>){
+        this.mealsDetail.value = foodDetails
         shouldShowLoading.value = false
-        shouldShowError.value = false
     }
 
     override fun onCleared() {

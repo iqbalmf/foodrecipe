@@ -12,6 +12,16 @@ data class Meals(
         @SerializedName("strMealThumb")
         val mealImage: String?,
         @SerializedName("idMeal")
-        val mealId: String?
+        val mealId: String?,
+        @SerializedName("strCategory")
+        val category: String?,
+        @SerializedName("strInstruction")
+        val instruction: String?,
+        @SerializedName("strTags")
+        val tags: String?,
+        @SerializedName("strYoutube")
+        val linkYoutube: String?,
+        @SerializedName("strSource")
+        val linkSource: String?
     )
 }
