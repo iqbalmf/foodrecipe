@@ -16,7 +16,7 @@ class DetailMealViewModel(application: Application) : BaseViewModel(application 
 
     val mealsDetail = MutableLiveData<List<Meals.Meal>>()
     val shouldShowLoading = MutableLiveData<Boolean>()
-    val foodName = MutableLiveData<String>()
+    private val foodName = MutableLiveData<String>()
 
     fun prepareDetailsFood(nameFood: String?){
         foodName.value = nameFood

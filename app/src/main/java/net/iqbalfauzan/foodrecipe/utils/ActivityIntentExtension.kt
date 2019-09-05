@@ -16,11 +16,9 @@ fun Activity.start(target: Class<*>, requestCode: Int? = null, func: (Intent.() 
     val intent = Intent(this, target)
     val activityOption = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
     func?.let { intent.it() }
-    if (requestCode != null) {
-        startActivityForResult(intent, requestCode)
-    } else if (func != null){
-        startActivity(intent, activityOption)
-    } else {
-        startActivity(intent)
+    when {
+        requestCode != null -> startActivityForResult(intent, requestCode)
+        func != null -> startActivity(intent, activityOption)
+        else -> startActivity(intent)
     }
 }

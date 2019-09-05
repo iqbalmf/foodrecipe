@@ -1,8 +1,5 @@
 package net.iqbalfauzan.foodrecipe.view.home
 
-import android.app.ActivityOptions
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,9 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import net.iqbalfauzan.foodrecipe.R
 import net.iqbalfauzan.foodrecipe.model.Category
 import net.iqbalfauzan.foodrecipe.model.Meals
-import net.iqbalfauzan.foodrecipe.view.categorymenu.CategoryMenuActivity
-import net.iqbalfauzan.foodrecipe.view.categorymenu.CategoryMenuWireframe
-import net.iqbalfauzan.foodrecipe.viewmodel.HomeViewModel
+import net.iqbalfauzan.foodrecipe.view.home.adapter.HomeCategoryListAdapter
+import net.iqbalfauzan.foodrecipe.view.home.adapter.HomeLatestMealAdapter
 
 
 class HomeActivity : AppCompatActivity() {
@@ -79,15 +75,7 @@ class HomeActivity : AppCompatActivity() {
         })
 
         viewModel.shouldOpenCategoryList.observe(this@HomeActivity, Observer {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(
-                    Intent(this, CategoryMenuActivity::class.java)
-                        .putExtra(CategoryMenuWireframe.CATEGORY_NAME, it),
-                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
-                )
-            } else {
-                wireframe.openCategoryList(this@HomeActivity, it)
-            }
+            wireframe.openCategoryList(this@HomeActivity, it)
         })
 
         viewModel.shouldOpenMealDetail.observe(this@HomeActivity, Observer {
@@ -101,17 +89,23 @@ class HomeActivity : AppCompatActivity() {
 
     private fun populateListItem() {
         categoryListAdapter =
-            HomeCategoryListAdapter(arrayListOf(), object : HomeCategoryListAdapter.EventListener {
-                override fun onClickCategory(categor: Category) {
-                    viewModel.onClickCategory(categor)
-                }
-            })
+            HomeCategoryListAdapter(
+                arrayListOf(),
+                object :
+                    HomeCategoryListAdapter.EventListener {
+                    override fun onClickCategory(categor: Category) {
+                        viewModel.onClickCategory(categor)
+                    }
+                })
 
         latestMealAdapter =
-            HomeLatestMealAdapter(arrayListOf(), object : HomeLatestMealAdapter.EventListener {
-                override fun onClickLatest(latestMeals: Meals.Meal) {
-                    viewModel.onClickLatestMeal(latestMeals)
-                }
-            })
+            HomeLatestMealAdapter(
+                arrayListOf(),
+                object :
+                    HomeLatestMealAdapter.EventListener {
+                    override fun onClickLatest(latestMeals: Meals.Meal) {
+                        viewModel.onClickLatestMeal(latestMeals)
+                    }
+                })
     }
 }

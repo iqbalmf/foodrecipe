@@ -1,4 +1,4 @@
-package net.iqbalfauzan.foodrecipe.viewmodel
+package net.iqbalfauzan.foodrecipe.view.categorymenu
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +23,11 @@ class CategoryMenuViewModel(application: Application) : BaseViewModel(applicatio
     val shouldShowError = MutableLiveData<Boolean>()
     val shouldShowLoading = MutableLiveData<Boolean>()
     val categoryName = MutableLiveData<String>()
+    val shouldOpenDetailFood = MutableLiveData<String>()
+
+    fun onClickDetailFood(foodName: String){
+        shouldOpenDetailFood.value = foodName
+    }
 
     fun fetch(category: String?){
         categoryName.value = category

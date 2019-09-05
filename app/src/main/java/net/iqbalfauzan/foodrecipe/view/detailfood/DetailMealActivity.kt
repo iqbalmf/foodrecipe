@@ -22,7 +22,7 @@ class DetailMealActivity : AppCompatActivity() {
         observeViewModel()
     }
 
-    private fun init(){
+    private fun init() {
         viewModel = ViewModelProviders.of(this@DetailMealActivity).get(DetailMealViewModel::class.java)
         viewModel.prepareDetailsFood(intent.getStringExtra(DetailMealWireframe.FOOD_NAME))
 
@@ -37,8 +37,8 @@ class DetailMealActivity : AppCompatActivity() {
 
     }
 
-    private fun observeViewModel(){
-        viewModel.mealsDetail.observe(this@DetailMealActivity, Observer {foodName->
+    private fun observeViewModel() {
+        viewModel.mealsDetail.observe(this@DetailMealActivity, Observer { foodName ->
             foodName.let {
                 Glide.with(this@DetailMealActivity).load(it.first().mealImage).into(detailFoodImage)
             }

@@ -1,4 +1,4 @@
-package net.iqbalfauzan.foodrecipe.view.home
+package net.iqbalfauzan.foodrecipe.view.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

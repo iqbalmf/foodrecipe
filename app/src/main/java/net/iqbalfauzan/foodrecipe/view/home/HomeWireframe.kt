@@ -19,8 +19,6 @@ class HomeWireframe {
             source.start(HomeActivity::class.java)
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     fun openCategoryList(source: Activity, category: String){
         CategoryMenuWireframe.startCategoryMenu(source = source, category = category)
     }

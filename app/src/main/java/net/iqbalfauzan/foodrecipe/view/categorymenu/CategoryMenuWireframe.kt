@@ -1,10 +1,8 @@
 package net.iqbalfauzan.foodrecipe.view.categorymenu
 
 import android.app.Activity
-import android.app.ActivityOptions
-import android.os.Build
-import android.os.Bundle
 import net.iqbalfauzan.foodrecipe.utils.start
+import net.iqbalfauzan.foodrecipe.view.detailfood.DetailMealWireframe
 
 /**
  * Project foodrecipe
@@ -18,13 +16,13 @@ class CategoryMenuWireframe {
             source: Activity,
             category: String
         ) {
-            source.start(target = CategoryMenuActivity::class.java,requestCode = null ) {
+            source.start(target = CategoryMenuActivity::class.java, requestCode = null) {
                 putExtra(CATEGORY_NAME, category)
             }
         }
     }
 
-    private fun openDetailFood(source: Activity) {
-
+    fun openDetailFood(source: Activity, foodName: String) {
+        DetailMealWireframe.startDetailFood(source, foodName)
     }
 }
