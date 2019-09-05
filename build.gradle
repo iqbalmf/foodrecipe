@@ -8,6 +8,7 @@ buildscript {
     ext.glideVersion = "4.9.0"
     ext.rxJavaVersion = "2.1.1"
     ext.roomVersion = "2.2.0-alpha02"
+    ext.rxBinding = "3.0.0"
 
     repositories {
         google()

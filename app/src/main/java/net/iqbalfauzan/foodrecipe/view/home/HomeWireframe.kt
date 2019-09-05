@@ -6,6 +6,7 @@ import android.app.ActivityOptions
 import android.os.Build
 import net.iqbalfauzan.foodrecipe.utils.start
 import net.iqbalfauzan.foodrecipe.view.categorymenu.CategoryMenuWireframe
+import net.iqbalfauzan.foodrecipe.view.detailfood.DetailMealWireframe
 
 /**
  * Project foodrecipe
@@ -22,5 +23,9 @@ class HomeWireframe {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     fun openCategoryList(source: Activity, category: String){
         CategoryMenuWireframe.startCategoryMenu(source = source, category = category)
+    }
+
+    fun openDetailFood(source: Activity, nameFood: String){
+        DetailMealWireframe.startDetailFood(source, nameFood)
     }
 }

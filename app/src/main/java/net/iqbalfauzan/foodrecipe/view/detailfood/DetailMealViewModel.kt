@@ -21,7 +21,7 @@ class DetailMealViewModel(application: Application) : BaseViewModel(application 
     fun prepareDetailsFood(nameFood: String?){
         foodName.value = nameFood
         nameFood?.let {
-
+            GetDetailsFood(nameFood)
         }
     }
 
@@ -33,7 +33,7 @@ class DetailMealViewModel(application: Application) : BaseViewModel(application 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<Meals>(){
                     override fun onSuccess(t: Meals) {
-
+                        detailsMealRetrieved(t.meals)
                     }
 
                     override fun onError(e: Throwable) {

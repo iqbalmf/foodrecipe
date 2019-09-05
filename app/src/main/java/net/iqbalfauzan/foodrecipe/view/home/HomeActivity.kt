@@ -90,6 +90,10 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
+        viewModel.shouldOpenMealDetail.observe(this@HomeActivity, Observer {
+            wireframe.openDetailFood(this@HomeActivity, it)
+        })
+
         viewModel.shouldShowMessage.observe(this@HomeActivity, Observer {
             Log.e("LATEST_TAG", it)
         })

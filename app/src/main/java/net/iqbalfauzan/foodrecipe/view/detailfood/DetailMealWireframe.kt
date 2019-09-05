@@ -5,8 +5,11 @@ import net.iqbalfauzan.foodrecipe.utils.start
 
 class DetailMealWireframe {
     companion object {
-        fun startDetailFood(source: Activity) {
-            source.start(DetailMealActivity::class.java)
+        const val FOOD_NAME = "DetailMealWireframe.FOOD_NAME"
+        fun startDetailFood(source: Activity, foodName: String) {
+            source.start(DetailMealActivity::class.java) {
+                putExtra(FOOD_NAME, foodName)
+            }
         }
     }
 }
